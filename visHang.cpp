@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <locale>
 using namespace std;
+//Class definition of vishanf=g
 visHang::visHang(){
   
   entry = new QLineEdit(this);
@@ -15,12 +16,12 @@ visHang::visHang(){
   scoreCount = 0;
 
   hangInput.open("hangmanWords");
-
+//Create vector of words
   while(hangInput >> word)
     {
       words.push_back(word);
     }
-
+//Picking a random word and the _ string of same length
   srand(time(NULL));
   int i = rand() % words.size();
   string test = words[i];
@@ -41,7 +42,7 @@ visHang::visHang(){
   headingGuess = new QLabel("", this);
   score = new QLabel("", this);
  
-
+//Setting dimensions for each part
   startButton->setGeometry(5, 70, 100, 30);
   entry->setGeometry(100,400,100,30);
   button->setGeometry(100, 450, 100, 30);
@@ -61,7 +62,8 @@ visHang::visHang(){
   connect(button,SIGNAL(clicked()), this, SLOT(guess()));
   connect(startButton,SIGNAL(clicked()), this, SLOT(reset()));
 }
-
+//Take in a letter as a guess and mark whether correct or incorrect
+//return: void
 void visHang::guess(){
   QString answer = entry->text();
   int index = 0;
@@ -126,7 +128,8 @@ void visHang::guess(){
   label->setText(wordInGame);
   repaint();
 }
-
+//Reset Game with new word
+//return: void
 void visHang:: reset(){
   lives = 10;
 
